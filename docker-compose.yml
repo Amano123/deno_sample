@@ -1,0 +1,12 @@
+version: '3'
+services:
+
+  deno:
+    build:
+      context: docker/deno
+      dockerfile: Dockerfile.deno
+    tty: true
+    volumes:
+      - ./app:/app
+    ports:
+      - 3000:3000
