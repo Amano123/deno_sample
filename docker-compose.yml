@@ -5,8 +5,12 @@ services:
     build:
       context: docker/deno
       dockerfile: Dockerfile.deno
+      args:
+        - USER_NAME=${USER_NAME}
+        - USER_ID=${USER_ID}
+        - GROUP_ID=${GROUP_ID}
     tty: true
     volumes:
-      - ./app:/app
+      - ./app:/home/${USER_NAME}/workspace
     ports:
       - 3000:3000

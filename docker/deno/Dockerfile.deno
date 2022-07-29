@@ -1,7 +1,24 @@
 FROM denoland/deno:1.24.0
 
+
+ARG USER_NAME
+ARG USER_ID
+ARG GROUP_ID
+
+# Userを削除
+RUN userdel -r deno
+
+## make user
+RUN set -x \
+&&  echo "Starting with UID : ${USER_ID}, GID: ${GROUP_ID}" \
+&&  adduser --disabled-password --gecos "" ${USER_NAME} \
+&&  echo "${USER_NAME}:${USER_NAME}" | chpasswd \
+&&  echo "%${USER_NAME}    ALL=(ALL)   NOPASSWD:    ALL" >> /etc/sudoers \
+&&  usermod -u ${USER_ID} ${USER_NAME} \
+&&  groupmod -g ${GROUP_ID} ${USER_NAME} 
+
 USER deno
+ENV DENO_DIR /home/${USER_NAME}/workspace
+WORKDIR /home/${USER_NAME}/workspace
 
-WORKDIR /app
-
-CMD ["bash"]
+CMD [ "bash" ]

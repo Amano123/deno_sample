@@ -1,0 +1,5 @@
+app/deps/*
+app/gen/*
+app/registries/*
+app/location_data/*
+app/deno_history.txt
