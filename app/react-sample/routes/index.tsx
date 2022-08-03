@@ -1,6 +1,3 @@
-// support jsx on deno deploy
-/** @jsxImportSource https://esm.sh/react@18.2.0 */
-
 import { Head, Link } from "aleph/react";
 
 const externalLinks = [
@@ -25,7 +22,7 @@ export default function Index() {
         <img src="./assets/logo.svg" width="75" height="75" title="Aleph.js" />
       </p>
       <h1 className="text-3xl font-bold mt-2">
-        The Fullstack Framework in Deno.
+        ポートフォリを作成します。
       </h1>
       <p className="text-center text-md text-gray-800">
         <strong>Aleph.js</strong> gives you the best developer experience for building web applications<br />{" "}

@@ -6,7 +6,9 @@ ARG USER_ID
 ARG GROUP_ID
 
 # Userを削除
-RUN userdel -r deno
+# RUN userdel -r deno
+RUN apt-get update \
+&&  apt-get install sudo  
 
 ## make user
 RUN set -x \
@@ -15,9 +17,10 @@ RUN set -x \
 &&  echo "${USER_NAME}:${USER_NAME}" | chpasswd \
 &&  echo "%${USER_NAME}    ALL=(ALL)   NOPASSWD:    ALL" >> /etc/sudoers \
 &&  usermod -u ${USER_ID} ${USER_NAME} \
-&&  groupmod -g ${GROUP_ID} ${USER_NAME} 
+&&  groupmod -g ${GROUP_ID} ${USER_NAME} \
+&&  usermod -aG deno ${USER_NAME}
 
-USER deno
+USER ${USER_NAME}
 ENV DENO_DIR /home/${USER_NAME}/workspace
 WORKDIR /home/${USER_NAME}/workspace
 

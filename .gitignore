@@ -3,3 +3,4 @@ app/gen/*
 app/registries/*
 app/location_data/*
 app/deno_history.txt
+app/check_cache_v1
